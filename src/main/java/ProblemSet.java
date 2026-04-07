@@ -21,21 +21,21 @@ public class ProblemSet {
 		int anotherAtSymbol = mail.lastIndexOf("@");	
 
 			if (atSymbol == -1){	
-				System.out.println("Invalid: gmail does not contain a @ symbol"); //looks within the input if it contains a @ synbol
+				System.out.println("Invalid: Missing @"); //looks within the input if it contains a @ synbol
 				return;			
 			}
 				if (atSymbol != anotherAtSymbol){	
-					System.out.println("Invalid: gmail contains multiple @ symbols"); // looks within the input if it contains multiple @ symbols
+					System.out.println("Invalid: Multiple @"); // looks within the input if it contains multiple @ symbols
 					return;
 				}
 
 			if (mail.startsWith(".") || (mail.endsWith("."))){
-				System.out.println("Invalid: gmail either starts with or ends with a period"); //looks within the input if it begins or ends with a period
+				System.out.println("Invalid: Starts or endswith dot "); //looks within the input if it begins or ends with a period
 				return;
 				}
 
 		if (mail.contains(" ")){
-			System.out.println("Invalid: gmail contains a space"); // looks within the input if it contains any spaces
+			System.out.println("Invalid: Contains spaces"); // looks within the input if it contains any spaces
 			return;
 		}
 
@@ -43,25 +43,25 @@ public class ProblemSet {
 	afterAtSymbol = mail.substring(atSymbol + 1); 	// all character after the @ symbol
 
 	if (beforeAtSymbol.length() < 1 || beforeAtSymbol.length() > 64){
-		System.out.println("Invalid: gmail either contains less than 1 or contains more than 64 characters"); // looks if the input before the @ symbol contains 1-64 characters.
+		System.out.println("Invalid: Local part is either too short or too long" ); // looks if the input before the @ symbol contains 1-64 characters.
 		return;
 	}
 
 	int periodSymbol = afterAtSymbol.lastIndexOf(".");
 		if (periodSymbol == -1){
-		System.out.println("Invalid: gmail does not contain a period in the domain"); // looks within the input if it contains a period
+		System.out.println("Invalid: Not dot in domain"); // looks within the input if it contains a period
 		return;
 	}
 	String anotherPeriodSymbol = ".";
 		if(anotherPeriodSymbol != afterAtSymbol){
-			System.out.println("gmail contains multiple periods in the domain extension");
+			System.out.println("Invalid: Contains multiple dots in domain extension");
 			return;
 		}
 
 	afterPeriod = afterAtSymbol.substring(periodSymbol + 1);
 	int domainExtension = afterPeriod.length();
 		if (domainExtension < 2 || (domainExtension > 6)){
-		System.out.println("gmail's domain extension does not contain less than 2 and more than 6 characters"); // looks if the input after the @ synbol contains 2-6 characters
+		System.out.println("Invalid: domain extension length"); // looks if the input after the @ synbol contains 2-6 characters
 		return;
 		}
 	
