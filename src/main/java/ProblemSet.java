@@ -13,83 +13,54 @@ public class ProblemSet {
 	Scanner input = new Scanner(System.in);
 	System.out.print("Input a gmail: ");
 	String mail = input.nextLine();
-		String status = "Invalid";
-		String issue = "";
+		String beforeAtSymbol = "";
+		String afterAtSymbol = "";
+		String afterPeriod = "";
 	
 		int atSymbol = mail.indexOf("@");
 		int anotherAtSymbol = mail.lastIndexOf("@");
 
-			if (atSymbol == -1){							
-			status = "Invalid"; 			// checks if there is a @ symbl present
+			if (atSymbol == -1){	
+				System.out.println("Invalid: gmail does not contain a @ symbol");
+				return;			
 		}
-			else if (atSymbol != anotherAtSymbol){
-				status = "Invalid";
-				issue = "gmail contains multiple @ symbols";		//  checks if there is multiple @ symbols contained in the input
-		}
-			else {
-				status = "Valid";
-			}
-
-				if (status.equals("Valid") && (mail.startsWith(".")) || (mail.endsWith("."))){
-					status = "Invalid";
-					issue =  "gmail either started with or ended with a period";
+				if (atSymbol != anotherAtSymbol){	
+					System.out.println("Invalid: gmail contains multiple @ symbols");
+					return;
 				}
 
-				if (status.equals("Valid") && (mail.contains(" "))){
-					status = "Invalid";
-					issue = "gmail contains a space";
+					if (mail.startsWith(".") || (mail.endsWith("."))){
+						System.out.println("Invalid: gmail either starts with or ends with a period");
+						return;
 				}
 
-		String beforeAtSymbol = "";
-		String afterAtSymbol = "";
-
-			if (status.equals("Valid")){
-				beforeAtSymbol = mail.substring(0, atSymbol); 	// all characters before the @ symbol
-				afterAtSymbol = mail.substring(atSymbol, + 1); 	// all character after the @ symbol
-			}
-
-			if (beforeAtSymbol.length() < 1){
-				status = "Invalid";
-				issue = "gmail contains less than 1-64 characters";
-			}
-
-			else if (beforeAtSymbol.length() > 64){
-				status =  "Invalid";
-				issue = "gmail contains more than 1-64 characters";
-			}
-
-			int periodSymbol = afterAtSymbol.indexOf(".");
-				if (status.equals("Valid") && periodSymbol == -1){
-					status = "Invalid";
-					issue = "gmail does not contain a period in the domain";
-			}
-
-			if (status.equals("Valid")){
-				String afterPeriod = afterAtSymbol.substring(periodSymbol + 1);
-				int domainExpansion = afterPeriod.length();
-					if (domainExpansion < 2){
-						status = "Invalid";
-						issue = "gmail's domain expansion after the period includes less than 2 characters";
+					if (mail.contains(" ")){
+						System.out.println("Invalid: gmail contains a space");
+						return;
 					}
 
-					else if (domainExpansion > 6){
-							status = "Invalid";
-							issue = "gmail's domain expansion after the period includes more than 6 characters";
-					}
+					beforeAtSymbol = mail.substring(0, atSymbol); 	// all characters before the @ symbol
+					afterAtSymbol = mail.substring(atSymbol + 1); 	// all character after the @ symbol
 
-					else {
-						status = "Valid";
-					}
-						
+				if (beforeAtSymbol.length() < 1 || beforeAtSymbol.length() > 64){
+					System.out.println("Invalid: gmail either contains less than 1 or contains more than 64 characters");
+					return;
+				}
+
+			int periodSymbol = afterAtSymbol.lastIndexOf(".");
+				if (periodSymbol == -1){
+					System.out.println("Invalid: gmail does not contain a period in the domain");
+					return;
 			}
-			
-		if (status.equals("Valid")){
-			System.out.println(issue);
+
+		afterPeriod = afterAtSymbol.substring(periodSymbol + 1);
+			int domainExtension = afterPeriod.length();
+				if (domainExtension < 2 || (domainExtension > 6)){
+					System.out.println("gmail's domain extension does not contain less than 2 and more than 6 characters");
+					return;
 		}
-
-		else {
-			System.out.println("Valid");
-		}
+	
+	System.out.println("Valid");
 	}
 }
 
